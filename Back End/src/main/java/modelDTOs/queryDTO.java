@@ -3,10 +3,9 @@ package modelDTOs;
 public class queryDTO {
 
     private int someId;
-    private String someName;
-    private String someUUID;
+    private String someEmail;
     private double someBal;
-    private String someCommand;
+
 
     //<><><><><>----------------------<><><><><>
     //<><><><><>-----Constructors-----<><><><><>
@@ -14,17 +13,16 @@ public class queryDTO {
 
     public queryDTO() {}
 
-    public queryDTO(int someId, String someName, String someUUID, double someBal, String someCommand) {
+    public queryDTO(int someId, String someEmail, double someBal) {
         this.someId = someId;
-        this.someName = someName;
-        this.someUUID = someUUID;
+        this.someEmail = someEmail;
         this.someBal = someBal;
     }
+
 
     //<><><><><>-----------------------------<><><><><>
     //<><><><><>-----Getters and Setters-----<><><><><>
     //<><><><><>-----------------------------<><><><><>
-
 
     public int getSomeId() {
         return someId;
@@ -34,20 +32,12 @@ public class queryDTO {
         this.someId = someId;
     }
 
-    public String getSomeName() {
-        return someName;
+    public String setSomeEmail() {
+        return someEmail;
     }
 
-    public void setSomeName(String someName) {
-        this.someName = someName;
-    }
-
-    public String getSomeUUID() {
-        return someUUID;
-    }
-
-    public void setSomeUUID(String someUUID) {
-        this.someUUID = someUUID;
+    public void setSomeEmail(String someEmail) {
+        this.someEmail = someEmail;
     }
 
     public double getSomeBal() {

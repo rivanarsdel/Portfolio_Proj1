@@ -1,9 +1,9 @@
 package mainApp;
 
-import controllers.AccountController;
+import controllers.EmployeeController;
 import io.javalin.Javalin;
-import repositories.AccountRepoImpl;
-import services.AccountServiceImpl;
+import repositories.EmployeeRepoImpl;
+import services.EmployeeServiceImpl;
 
 public class main {
 
@@ -26,16 +26,16 @@ public class main {
 
     public static void setControllerRoutes(Javalin javApp) {
 
-        //<><><><><>-----Account Routes-----<><><><><>
-        AccountRepoImpl accRep = new AccountRepoImpl();
-        AccountServiceImpl accSer = new AccountServiceImpl(accRep);
-        AccountController accCon = new AccountController(accSer);
-        String accRoute = "/Accounts";
+        //<><><><><>-----Employee Routes-----<><><><><>
+        EmployeeRepoImpl empRep = new EmployeeRepoImpl();
+        EmployeeServiceImpl empSer = new EmployeeServiceImpl(empRep);
+        EmployeeController empCon = new EmployeeController(empSer);
+        String empRoute = "/Accounts";
 
-        javApp.post(accRoute, accCon.addAccount);
-        javApp.get(accRoute, accCon.getAccount);
-        javApp.put(accRoute, accCon.updateAccount);
-        javApp.delete(accRoute, accCon.deleteAccount);
+        javApp.post(empRoute, empCon.addEmployee);
+        javApp.get(empRoute, empCon.getEmployee);
+        javApp.put(empRoute, empCon.updateEmployee);
+        javApp.delete(empRoute, empCon.deleteEmployee);
 
     }
 }
