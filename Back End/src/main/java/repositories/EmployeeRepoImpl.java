@@ -11,19 +11,27 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeRepoImpl extends HelperMethods implements EmployeeRepo  {
+public class EmployeeRepoImpl extends HelperMethods implements EmployeeRepo {
 
     public static Connection locConn = JDBCConnection.getConnection();
 
     @Override
     public Employee addEmployee(Employee empObj) {
+        //todo finish implementation
 
-        String sqlQuery = "INSERT INTO Employees VALUES (DEFAULT, ?, ?, ?);";
+        String sqlQuery = "INSERT INTO Employees VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?);";
+        int counter = 1; // Tracks parameter index, mark '?'
 
         try{
             PreparedStatement ps = locConn.prepareStatement(sqlQuery);
 
-            ps.setString(1, empObj.getEmail());
+            ps.setString(counter, empObj.getFirstName()); counter++;
+            ps.setString(counter, empObj.getLastName()); counter++;
+            ps.setString(counter, empObj.getEmail()); counter++;
+            ps.setString(counter, empObj.getPassword()); counter++;
+            ps.setString(counter, empObj.getDepartment()); counter++;
+            ps.setString(counter, empObj.getDeptRole()); counter++;
+            ps.setDouble(counter, empObj.getTrBalance());
 
             ResultSet resSet = ps.executeQuery();
 
@@ -79,11 +87,25 @@ public class EmployeeRepoImpl extends HelperMethods implements EmployeeRepo  {
         String sqlQuery =
                 "UPDATE Employees SET " +
                         "empId = ?, " +
+                        "firstName = ?, " +
+                        "lastName = ?, " +
+                        "email = ?, " +
+                        "password = ?, " +
+                        "department = ?, " +
+                        "deptRole = ?, " +
+                        "trBalance = ?, " +
                         "WHERE email = ?;";
 
         try {
             PreparedStatement ps = locConn.prepareStatement(sqlQuery);
             ps.setInt(1, empObj.getEmpID());
+            ps.setString(2, empObj.getFirstName());
+            ps.setString(3, empObj.getLastName());
+            ps.setString(4, empObj.getEmail());
+            ps.setString(5, empObj.getPassword());
+            ps.setString(6, empObj.getDepartment());
+            ps.setString(7, empObj.getDeptRole());
+            ps.setDouble(8, empObj.getTrBalance());
 
             ResultSet resSet = ps.executeQuery();
             if(resSet.next()) {

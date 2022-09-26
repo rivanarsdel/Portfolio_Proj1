@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface EmployeeRepo {
 
-    Employee addEmployee(Employee accObj);
-    Employee getEmployee(Employee accObj);
+    Employee addEmployee(Employee empObj);
+    Employee getEmployee(Employee empObj);
     List<Employee> getAllEmployees();
-    Employee updateEmployee(Employee accObj);
-    Employee deleteEmployee(Employee accObj);
+    Employee updateEmployee(Employee empObj);
+    Employee deleteEmployee(Employee empObj);
 
 }

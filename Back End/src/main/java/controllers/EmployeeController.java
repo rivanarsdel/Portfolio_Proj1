@@ -15,7 +15,8 @@ public class EmployeeController {
 
     public Handler addEmployee = ctx -> {
         Employee empObj = gson.fromJson(ctx.body(), Employee.class);
-        empObj = empSer.addEmployee(empObj);
+        empSer.addEmployee(empObj);
+        empObj = empSer.getEmployee(empObj);
         ctx.result((empObj != null) ? gson.toJson(empObj) : "{}");
         if(empObj != null) {ctx.status(201); } else { ctx.status(404); }
     };
@@ -23,14 +24,14 @@ public class EmployeeController {
     public Handler getEmployee = ctx -> {
 
         if(!ctx.body().equals("{}")) {
-            //<><><><><>-----Single Getter, if ctx.body() exists-----<><><><><>
+            // Single Getter, if ctx.body() exists
             Employee empObj = gson.fromJson(ctx.body(), Employee.class);
             empObj = empSer.getEmployee(empObj);
             ctx.result((empObj != null) ? gson.toJson(empObj) : "{}");
             if (empObj != null) ctx.status(200); else ctx.status(404);
 
         } else {
-            //<><><><><>-----Get All, if ctx.body() does not exist-----<><><><><>
+            // Get All, if ctx.body() does not exist
             List<Employee> locList = empSer.getAllEmployees();
             ctx.result((locList != null) ? gson.toJson(locList) : "{}");
             if(locList != null) {ctx.status(200); } else { ctx.status(404); }

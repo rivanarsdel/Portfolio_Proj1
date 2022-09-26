@@ -22,13 +22,14 @@ public class JDBCConnection {
                 Properties props = new Properties();
                 props.load(input);
 
-                String endpoint = props.getProperty("endpoint");
-                String url = "jdbc:postgresql://" + endpoint + "/postgres";
-                String username = props.getProperty("username");
-                String password = props.getProperty("password");
+                // Credentials for remote database go in local file "connection.properties" and require appending in DriverManager constructor
+//                String endpoint = props.getProperty("endpoint");
+//                String username = props.getProperty("username");
+//                String password = props.getProperty("password");
 
+                String url = "jdbc:h2:mem:";
 
-                conn = DriverManager.getConnection(url, username, password);
+                conn = DriverManager.getConnection(url);
 
             } catch (SQLException | IOException e) {
                 e.printStackTrace();

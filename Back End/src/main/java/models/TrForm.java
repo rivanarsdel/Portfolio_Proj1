@@ -1,11 +1,9 @@
 package models;
 
-import utilities.HelperMethods;
-
-public class ReimbursementForm {
+public class TrForm {
 
     //Who is requesting
-    private int trId;
+    private int trfId;
     private String empEmail; //foreign key maps many-to-one
 
     //What does it cover
@@ -35,10 +33,10 @@ public class ReimbursementForm {
     //<><><><><>-----Constructors-----<><><><><>
     //<><><><><>----------------------<><><><><>
 
-    public ReimbursementForm() {}
+    public TrForm() {}
 
-    public ReimbursementForm(
-            int trId,
+    public TrForm(
+            int trfId,
             String eventCovered,
             long eventStartDate,
             long eventEndDate,
@@ -53,7 +51,7 @@ public class ReimbursementForm {
             String eventGrade,
             boolean eventPassed
     ) {
-        this.trId = trId;
+        this.trfId = trfId;
         this.eventCovered = eventCovered;
         this.eventStartDate = eventStartDate;
         this.eventEndDate = eventEndDate;
@@ -79,12 +77,12 @@ public class ReimbursementForm {
 
     public void setTrCost(double trCost) {this.trCost = trCost;}
 
-    public int getTrId() {
-        return trId;
+    public int getTrfId() {
+        return trfId;
     }
 
-    public void setTrId(int trId) {
-        this.trId = trId;
+    public void setTrfId(int trfId) {
+        this.trfId = trfId;
     }
 
     public String getEmpEmail() {

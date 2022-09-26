@@ -1,8 +1,8 @@
 package utilities;
 
 import models.Employee;
-import models.ReimbursementForm;
-import models.TuitionEvent;
+import models.TrForm;
+import models.TrEvent;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,9 +11,9 @@ public class HelperMethods {
 
     //<><><><><>-----Builder helpers to return Objects from SQL queries-----<><><><><>
 
-    public TuitionEvent builtTuitionEvent(ResultSet rs) throws SQLException {
+    public TrEvent buildTrEvent(ResultSet rs) throws SQLException {
 
-        TuitionEvent tevObj = new TuitionEvent();
+        TrEvent tevObj = new TrEvent();
 
         tevObj.setEventId(rs.getInt("eventId"));
         tevObj.setEventName(rs.getString("eventName"));
@@ -37,12 +37,12 @@ public class HelperMethods {
 
         return empObj;
     }
-    public ReimbursementForm buildTrForm(ResultSet rs) throws SQLException {
+    public TrForm buildTrForm(ResultSet rs) throws SQLException {
 
-        ReimbursementForm trObj = new ReimbursementForm();
+        TrForm trObj = new TrForm();
 
 
-        trObj.setTrId(rs.getInt("trId"));
+        trObj.setTrfId(rs.getInt("trId"));
         trObj.setEmpEmail(rs.getString("empEmail"));
 
         trObj.setEventCovered(rs.getString("eventCovered"));

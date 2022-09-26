@@ -16,6 +16,9 @@ dependencies {
     implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.31'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.9.0'
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.4.0'
+
+    // Local Database
+    testImplementation 'com.h2database:h2:2.1.214'
 }
 
 test {

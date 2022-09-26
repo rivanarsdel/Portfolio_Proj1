@@ -2,7 +2,7 @@ package models;
 
 import utilities.HelperMethods;
 
-public class TuitionEvent extends HelperMethods {
+public class TrEvent extends HelperMethods {
 
     private int eventId;
     private String eventName; //unique not null
@@ -15,9 +15,9 @@ public class TuitionEvent extends HelperMethods {
     //<><><><><>-----------------------------<><><><><>
 
 
-    public TuitionEvent() {}
+    public TrEvent() {}
 
-    public TuitionEvent(int eventId, String eventName, double costModifier, String gradeScale) {
+    public TrEvent(int eventId, String eventName, double costModifier, String gradeScale) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.costModifier = costModifier;
@@ -27,6 +27,7 @@ public class TuitionEvent extends HelperMethods {
     //<><><><><>-----------------------------<><><><><>
     //<><><><><>-----Getters and Setters-----<><><><><>
     //<><><><><>-----------------------------<><><><><>
+
 
     public int getEventId() {return eventId;}
 
