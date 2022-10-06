@@ -1,0 +1,104 @@
+package utilitiesh2;
+
+import utilities.JDBCConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class DatabaseInitializerImpl implements DatabaseInitializer{
+
+    public static Connection locConn = JDBCConnection.getConnection();
+
+    @Override
+    public void initiateDatabase() {
+
+        String sqlStmt =
+                        "DROP TABLE IF EXISTS EmpMessages;" +
+                        "DROP TABLE IF EXISTS TrForms;" +
+                        "DROP TABLE IF EXISTS TrEvents;" +
+                        "DROP TABLE IF EXISTS Employees;" +
+                        "CREATE TABLE TrEvents (" +
+                        "treId SERIAL, " +
+                        "eventName VARCHAR(50), " +
+                        "costModifier NUMERIC(12, 2), " +
+                        "gradeScale VARCHAR(50)" +
+                        ");" +
+                        "CREATE TABLE TrForms (" +
+                        "trfId SERIAL," +
+                        "empEmail varchar(50)," +
+                        "eventCovered varchar(50)," +
+                        "eventStartDate bigint," +
+                        "eventEndDate bigint," +
+                        "eventCost numeric(12, 2)," +
+                        "trCost numeric(12, 2)," +
+                        "timeCommit int," +
+                        "submitDate bigint," +
+                        "deadlineDate bigint," +
+                        "justification blob," +
+                        "approvalStage int," +
+                        "flagged boolean," +
+                        "flagDesc blob," +
+                        "eventGrade varchar(50)," +
+                        "eventPassed boolean" +
+                        ");" +
+                        "CREATE TABLE Employees (" +
+                        "empId SERIAL," +
+                        "firstName varchar(50)," +
+                        "lsatName varchar(50)," +
+                        "email varchar(50)," +
+                        "password varchar(50)," +
+                        "department varchar(50)," +
+                        "deptRole varchar(50)," +
+                        "trBalance numeric(12, 2)" +
+                        ");" +
+                        "CREATE TABLE EmpMessages (" +
+                        "empEmailSender varchar(50)," +
+                        "empEmailReceiver varchar(50)," +
+                        "messageContent blob" +
+                        ");" +
+                        "ALTER TABLE TrForms ADD CONSTRAINT fk_TrForms_Employees" +
+                        "FOREIGN KEY (empEmail) REFERENCES Employees(email) ON DELETE SET NULL;" +
+                        "ALTER TABLE EmpMessages ADD CONSTRAINT fk_EmpMessages_Employees" +
+                        "FOREIGN KEY (empEmailReceiver) REFERENCES Employees(email) ON DELETE SET NULL;" +
+                        "ALTER TABLE EmpMessages ADD CONSTRAINT fk_EmpMessages_Employees" +
+                        "FOREIGN KEY (empEmailSender) REFERENCES Employees(email) ON DELETE SET NULL;" +
+                        "INSERT INTO TrEvents VALUES (" +
+                        "DEFAULT, 'University Course', 0.80, 'Letter Grade | Marks'" +
+                        ");" +
+                        "INSERT INTO TrEvents VALUES (" +
+                        "DEFAULT, 'Seminar', 0.60, 'Letter Grade | Marks'" +
+                        ");" +
+                        "INSERT INTO TrEvents VALUES (" +
+                        "DEFAULT, 'Certification Prep Class', 0.75, 'Pass|Fail'" +
+                        ");" +
+                        "INSERT INTO TrEvents VALUES (" +
+                        "DEFAULT, 'Certification', 1.00, 'Pass|Fail'" +
+                        ");" +
+                        "INSERT INTO TrEvents VALUES (" +
+                        "DEFAULT, 'Technical Training', 0.90, 'Letter Grade | Marks'" +
+                        ");" +
+                        "INSERT INTO TrEvents VALUES (" +
+                        "DEFAULT, 'Other', 0.30, 'Provide Specifics to Benefits Coordinator'" +
+                        ");" +
+                        "INSERT INTO Employees VALUES (" +
+                        "DEFAULT,'demoFirstName','demoLastName','demoEmployee@555mail.com','demoPassword','demoDepartment','employee',1000.00" +
+                        ");" +
+                        "INSERT INTO Employees VALUES (" +
+                        "DEFAULT,'demoDirSupName','demoLastName','demoDirSup@555mail.com','demoPassword','demoDepartment','Direct Supervisor',1000.00" +
+                        ");" +
+                        "INSERT INTO Employees VALUES (" +
+                        "DEFAULT,'demoDeptHeadName','demoLastName','demoDeptHead@555mail.com','demoPassword','demoDepartment','Department Head',1000.00" +
+                        ");" +
+                        "INSERT INTO Employees VALUES (" +
+                        "DEFAULT,'demoBenCoName','demoLastName','demoBenCo@555mail.com','demoPassword','demoDepartment','Benefits Coordinator',1000.00";
+
+        try {
+            PreparedStatement ps = locConn.prepareStatement(sqlStmt);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+}

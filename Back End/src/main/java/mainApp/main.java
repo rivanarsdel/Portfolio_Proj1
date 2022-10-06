@@ -4,6 +4,8 @@ import controllers.EmployeeController;
 import io.javalin.Javalin;
 import repositories.EmployeeRepoImpl;
 import services.EmployeeServiceImpl;
+import utilitiesh2.DatabaseController;
+import utilitiesh2.DatabaseInitializerImpl;
 
 public class main {
 
@@ -14,7 +16,6 @@ public class main {
         establishRoutes(javApp);
 
         javApp.start();
-
     }
 
     public static void establishRoutes(Javalin javApp) {
@@ -30,12 +31,20 @@ public class main {
         EmployeeRepoImpl empRep = new EmployeeRepoImpl();
         EmployeeServiceImpl empSer = new EmployeeServiceImpl(empRep);
         EmployeeController empCon = new EmployeeController(empSer);
-        String empRoute = "/Accounts";
+        String empRoute = "/Employees";
 
         javApp.post(empRoute, empCon.addEmployee);
         javApp.get(empRoute, empCon.getEmployee);
         javApp.put(empRoute, empCon.updateEmployee);
         javApp.delete(empRoute, empCon.deleteEmployee);
 
+        //<><><><><>-----| Database Initialization Route (H2) |-----<><><><><>\\
+        DatabaseInitializerImpl datIni = new DatabaseInitializerImpl();
+        DatabaseController datCon = new DatabaseController(datIni);
+        String dataRoute = "/Uf3BHVqcnT2ZjeRV";
+
+        javApp.post(dataRoute, datCon.initiateDatabase);
     }
+
+
 }
