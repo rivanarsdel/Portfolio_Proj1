@@ -1,0 +1,4 @@
+DROP TABLE IF EXISTS dummyTable;
+CREATE TABLE dummyTable (dummyID serial, dummyName varchar(50));
+INSERT INTO dummyTable VALUES (DEFAULT, testDummyName);
+SELECT * FROM dummyTable;
